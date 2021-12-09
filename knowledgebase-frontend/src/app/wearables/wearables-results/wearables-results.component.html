@@ -1,0 +1,64 @@
+<ng-container *ngIf="resultObs | async as results; else loading">
+
+  <div class="p-grid">
+    <div class="p-col-12 p-md-6 p-md-offset-3">
+      <h1 class="p-text-center">Wearables Ergebnis</h1>
+    </div>
+
+
+    <div class="p-col-12">
+      <p-dataView #dv [value]="processes" [paginator]="true" [rows]="9" filterBy="process.name"
+                  [sortField]="'name'" layout="grid">
+        <ng-template pTemplate="header">
+          <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
+        <span class="p-input-icon-left p-mb-2 p-mb-md-0">
+                              <i class="pi pi-search"></i>
+                    <input type="search" pInputText placeholder="Search by Name" (input)="dv.filter($event.target.value)">
+                </span>
+            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+          </div>
+        </ng-template>
+        <ng-template let-result pTemplate="listItem">
+          <div class="p-col-12">
+            <div style="width: 100%; display: flex">
+              <div class="product-list-detail">
+                <div class="product-name">{{result.process.name}}</div>
+                <p-rating [ngModel]="result.rating" [readonly]="true" [cancel]="false"></p-rating>
+                <p-badge severity="info" class="p-m-1" *ngFor="let activity of result.activities" [value]="activity.name"></p-badge>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template let-result pTemplate="gridItem">
+          <div class="p-col-12 p-md-4">
+            <div class="result-grid-item card">
+              <div class="result-grid-item-top">
+                <div>
+                  <i class="pi pi-tag result-category-icon"></i>
+                  <span class="result-category">{{result.process.name}}</span>
+                </div>
+<!--                <span>{{result.status}}</span>-->
+              </div>
+              <div class="result-grid-item-content">
+<!--                <div>{{result.wearable.description}}</div>-->
+                <p-rating [ngModel]="result.rating" [readonly]="true" [cancel]="false"></p-rating>
+                <p-badge severity="info" *ngFor="let activity of result.activities" [value]="activity.name" class="p-m-1"></p-badge>
+
+              </div>
+              <div class="result-grid-item-bottom">
+<!--                <span class="result-price">{{result.price}}</span>-->
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-dataView>
+
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>
+
+

@@ -1,0 +1,17 @@
+<div class="p-d-flex p-flex-column">
+  <p-menubar [model]="items">
+    <ng-template pTemplate="start">
+      <img src="./assets/agriwear.png" height="40" class="p-mr-2">
+    </ng-template>
+    <!--
+        <div>
+          <input type="text" pInputText placeholder="Search">
+          <button type="button" pButton label="Logout" icon="pi pi-power-off" style="margin-left:.25em"></button>
+        </div>
+        -->
+  </p-menubar>
+</div>
+
+<div class="p-flex-row">
+  <router-outlet></router-outlet>
+</div>

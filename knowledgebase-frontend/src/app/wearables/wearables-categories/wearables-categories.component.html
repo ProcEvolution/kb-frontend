@@ -1,0 +1,32 @@
+<ng-container *ngIf="categoriesObs | async as categories; else loading">
+
+  <div class="p-grid">
+    <div class="p-col-12 p-md-6 p-md-offset-3">
+      <h1 class="p-text-center">Wearable-Kategorien</h1>
+    </div>
+  </div>
+
+
+  <div class="p-d-flex p-flex-row p-jc-center p-flex-wrap p-p-1 p-shadow-1">
+    <div class="p-m-1" *ngFor="let category of categories">
+      <p-card (click)="selectCategory(category)">
+        <ng-template pTemplate="header">
+          <div class="p-grid p-justify-center">
+            <img style="max-width: 75px;" alt="Card" [src]="category.iconURL">
+          </div>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <p-badge severity="info" class="p-m-1 p-p-1" size="xlarge" [value]="category.name"></p-badge>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+
+  <hr>
+
+</ng-container>
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>
+

@@ -1,0 +1,40 @@
+<ng-container *ngIf="activitiesObs | async as activities; else loading">
+
+  <div class="p-grid">
+    <div class="p-col-12 p-md-6 p-md-offset-3">
+      <h1 class="p-text-center">Prozessaktivitäten</h1>
+    </div>
+
+    <!---->
+    <div class="p-col-12 p-m-2">
+      <p-pickList [source]="activities | filterOnProcessId: process"  [target]="selectedActivities" (onMoveToTarget)="moveToTarget()" (onMoveAllToTarget)="moveAllToTarget()" sourceHeader="Aktivitäten" targetHeader="Ausgewählte Aktivitäten" [dragdrop]="true"
+                  [responsive]="false" [sourceStyle]="{'height':'auto'}" [targetStyle]="{'max-height':'auto'}" filterBy="name"
+                  sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name">
+        <ng-template let-activity pTemplate="item">
+          <div class="product-item">
+            <div>
+              <i class="pi pi-tag product-category-icon"></i>
+              <h5 class="p-mb-2">{{activity.name}}</h5>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: flex-end">
+              <span>{{activity.status}}</span>
+            </div>
+          </div>
+        </ng-template>
+      </p-pickList>
+    </div>
+
+    <div class="p-col-12 p-grid p-justify-end">
+      <button icon="pi pi-send" pButton type="button" label="Bestätigen" (click)="goToResult()" ></button>
+    </div>
+  </div>
+
+  <hr>
+</ng-container>
+
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>
+
+

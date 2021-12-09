@@ -1,0 +1,23 @@
+<ng-container *ngIf="categoriesObs | async as processCategories; else loading">
+
+  <div class="p-grid">
+    <div class="p-col-12 p-md-6 p-md-offset-3">
+      <h1 class="p-text-center">Prozesskategorien</h1>
+    </div>
+  </div>
+
+
+  <div class="p-d-flex p-flex-row p-jc-center p-flex-wrap p-p-2">
+    <div *ngFor="let category of processCategories" style="margin-top: 0.5rem;">
+      <p-badge (click)="selectProcessCategory(category)" severity="info" class="p-m-4 p-p-2 p-mt-auto" size="xlarge" [value]="category.name">
+      </p-badge>
+    </div>
+  </div>
+
+  <hr>
+
+</ng-container>
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>

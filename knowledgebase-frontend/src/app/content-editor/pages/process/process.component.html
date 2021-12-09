@@ -1,0 +1,174 @@
+<p-toast></p-toast>
+
+<div class="card">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
+                    (click)="openNew()"></button>
+            <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger"
+                    (click)="deleteSelectedProducts()"
+                    [disabled]="!selectedProcess || !selectedProcess.length"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="processes" [rows]="10" [paginator]="true"
+             [globalFilterFields]="['id','name','description','icon']" [(selection)]="selectedProcess"
+             [rowHover]="true" dataKey="id"
+             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+             [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h5 class="p-m-0">Process</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value , 'contains')"
+                           placeholder="Search..."/>
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="name">Id
+                    <p-sortIcon field="id"></p-sortIcon>
+                </th>
+                <th pSortableColumn="name">Name
+                    <p-sortIcon field="name"></p-sortIcon>
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-process>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="process"></p-tableCheckbox>
+                </td>
+                <td>{{process.id}}</td>
+                <td>{{process.name}}</td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+                            (click)="editProcess(process)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                            (click)="deleteProcess(process)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                In total there are {{processes ? processes.length : 0 }} products.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog [(visible)]="processDialog" [style]="{width: '75vw'}" (onHide)="hideDialog()" header="Process" [modal]="true"
+          styleClass="p-fluid">
+    <ng-template pTemplate="header">
+        {{process ? process.id : ''}}
+    </ng-template>
+    <ng-template pTemplate="content">
+        <div class="p-fluid" [formGroup]="processFormGroup">
+            <div class="p-field p-row">
+                <label for="name">Name</label>
+                <input id="name" type="text" pInputText formControlName="name">
+            </div>
+        </div>
+        <div class="p-field p-row">
+            <p-table [value]="processCategories" selectionMode="single" [(selection)]="processCategorySelection"
+                     dataKey="id">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        <h5 class="p-m-0">Show Process Categories</h5>
+                        <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value , 'contains')"
+                           placeholder="Search..."/>
+                </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                        </th>
+                        <th pSortableColumn="name">Id
+                            <p-sortIcon field="id"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="name">Name
+                            <p-sortIcon field="name"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="description">Description
+                            <p-sortIcon field="description"></p-sortIcon>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-processCategory>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="processCategory"></p-tableCheckbox>
+                        </td>
+                        <td>{{processCategory.id}}</td>
+                        <td>{{processCategory.name}}</td>
+                        <td>{{processCategory.description}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        In total there are {{processCategories ? processCategories.length : 0 }} products.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+
+        <div class="p-field p-row">
+            <p-table [value]="activities" selectionMode="single" [(selection)]="activitySelection"
+                     dataKey="id">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        <h5 class="p-m-0">Show Activities</h5>
+                        <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value , 'contains')"
+                           placeholder="Search..."/>
+                </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                        </th>
+                        <th pSortableColumn="id">Id
+                            <p-sortIcon field="id"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="name">Name
+                            <p-sortIcon field="name"></p-sortIcon>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-activity>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="activity"></p-tableCheckbox>
+                        </td>
+                        <td>{{activity.id}}</td>
+                        <td>{{activity.name}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        In total there are {{activities ? activities.length : 0 }} activities.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '30vw'}"></p-confirmDialog>

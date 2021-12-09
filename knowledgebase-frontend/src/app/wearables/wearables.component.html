@@ -1,0 +1,9 @@
+<div class="p-flex-row p-m-6">
+  <p-panel header="{{items[activeIndex].label}}">
+    <app-wearables-categories [(activeIndex)]="activeIndex" [(selectedWearableCategory)]="selectedWearableCategory" *ngIf="activeIndex == 0"></app-wearables-categories>
+    <app-wearables-overview [(activeIndex)]="activeIndex" [(selectedWearable)]="selectedWearable" [wearableCategory]="selectedWearableCategory" *ngIf="activeIndex == 1"></app-wearables-overview>
+    <app-wearables-results *ngIf="activeIndex == 2" [wearable]="selectedWearable"></app-wearables-results>
+    <p-toast></p-toast>
+    <p-steps [model]="items" [(activeIndex)]="activeIndex" [readonly]="false"></p-steps>
+  </p-panel>
+</div>

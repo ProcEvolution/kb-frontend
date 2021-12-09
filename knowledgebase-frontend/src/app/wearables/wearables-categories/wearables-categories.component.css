@@ -1,0 +1,32 @@
+p-badge:hover{
+  cursor: pointer;
+}
+
+
+::ng-deep .p-card-body{
+  background: rgb(46,32,37);
+}
+
+::ng-deep .p-card-header{
+  background: rgb(46,32,37);
+}
+
+::ng-deep .p-card-subtitle {
+  color: rgb(238,122,60) !important;
+}
+
+::ng-deep .p-card:hover > .p-card-body,
+::ng-deep .p-card:hover > .p-card-header{
+  animation-name: hoveranimation2;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes hoveranimation2 {
+  0% {}
+  100% {
+    background: rgb(250,228,213);
+    color: rgb(76,69,65);
+  }
+}

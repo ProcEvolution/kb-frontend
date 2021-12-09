@@ -1,0 +1,17 @@
+.result-grid-item {
+  margin: .5em;
+  border: 1px solid #dee2e6;
+
+}
+
+.result-grid-item-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.result-grid-item-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

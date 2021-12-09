@@ -1,0 +1,61 @@
+<div class="p-grid">
+  <div class="home-container">
+    <div class="p-col-12">
+      <div class="p-col-12 p-md-6 p-md-offset-3 test">
+        <h1 style="text-align: center">Knowledgebase</h1>
+        <p>Willkommen bei der Wissensdatenbank für Wearables im Landwirtschaftssektor. Im Rahmen unserer Wissensdatenbank werden auf eine übersichtliche, konsolidierte Art, die Einsatzmöglichkeiten von Wearables in der Landwirtschaft vorgestellt. Denn Wearables (tragbare Computersysteme) bieten zunehmend die Möglichkeit Ihre landwirtschaftlichen und logistischen Prozesse zu optimieren, u.a. im Hinblick auf Effizienzsteigerungen (Ressourcenschonung), Fehlerreduzierungen und / oder eine wirtschaftlichere und sicherere Arbeitsweise.</p>
+      </div>
+    </div>
+    <div class="p-col-12">
+      <p-divider></p-divider>
+      <div class="p-grid p-jc-evenly">
+        <div class="p-col-12 p-md-4">
+          <p-card class="homecard" routerLink="/processes" pRipple header="Prozesse" subheader="Welche Wearables kann ich für einen bestimmten Prozess verwenden?" styleClass="p-card-shadow homecard">
+            <ng-template pTemplate="header">
+              <div class="p-grid p-jc-evenly">
+                <span style="font-size: 15em; color: Tomato;">
+                  <i class="fas fa-sync"></i>
+                </span>
+              </div>
+            </ng-template>
+            <p>Möchten Sie wissen, welche Wearables Sie in
+
+              Ihrem landwirtschaftlichen Betrieb einsetzen
+
+              können, um Ihren Prozess zu optimieren? Dann
+
+              wählen Sie „Prozesse“. In den nächsten
+
+              Schritten treffen Sie eine Auswahl für einen
+
+              Prozess und können angeben, welche
+
+              Aktivitäten für Ihren Betrieb relevant sind. Die
+
+              Wissensdatenbank bietet Ihnen anschließend
+
+              einen Überblick über Wearables, die Ihren
+
+              Prozess unterstützen können.</p>
+            <ng-template pTemplate="footer">
+            </ng-template>
+          </p-card>
+        </div>
+        <div class="p-col-12 p-md-4">
+          <p-card routerLink="/wearables" pRipple header="Wearables" subheader="Welche Prozesse kann ich mit einem bestimmten Wearable unterstützen?" styleClass="p-card-shadow homecard">
+            <ng-template pTemplate="header">
+              <div class="p-grid p-jc-evenly">
+                <span style="font-size: 15em; color: Tomato;">
+                  <i class="fas fa-mobile-alt"></i>
+                </span>
+              </div>
+            </ng-template>
+            <p>Haben Sie bereits ein Wearable gekauft oder möchten Sie die Anwendbarkeit eines Wearables in Ihrem landwirtschaftlichen Betrieb untersuchen? Dann wählen Sie „Wearables“. In den nächsten Schritten treffen Sie eine Wahl für ein oder mehrere Wearables. Die Wissensdatenbank gibt Ihnen anschließend einen Überblick über die Prozesse, die das ausgewählte Wearable unterstützen kann.</p>
+            <ng-template pTemplate="footer">
+            </ng-template>
+          </p-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

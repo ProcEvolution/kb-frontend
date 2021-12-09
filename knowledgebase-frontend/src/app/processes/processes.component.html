@@ -1,0 +1,10 @@
+<div class="p-flex-row p-m-6">
+  <p-panel header="{{items[activeIndex].label}}">
+    <app-process-categories [(activeIndex)]="activeIndex" [(selectedProcessCategory)]="selectedProcessCategory" *ngIf="activeIndex == 0"></app-process-categories>
+    <app-processes-overview [(activeIndex)]="activeIndex" [(selectedProcess)]="selectedProcess" [processCategory]="selectedProcessCategory" *ngIf="activeIndex == 1"></app-processes-overview>
+    <app-processes-activities [(activeIndex)]="activeIndex" [(selectedActivities)]="selectedProcessActivities" [process]="selectedProcess" *ngIf="activeIndex == 2"></app-processes-activities>
+    <app-processes-results *ngIf="activeIndex == 3" [activities]="selectedProcessActivities"></app-processes-results>
+    <p-toast></p-toast>
+    <p-steps [model]="items" [(activeIndex)]="activeIndex" [readonly]="false"></p-steps>
+  </p-panel>
+</div>

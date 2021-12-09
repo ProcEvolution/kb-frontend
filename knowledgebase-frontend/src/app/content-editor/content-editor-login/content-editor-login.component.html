@@ -1,0 +1,26 @@
+<div class="p-col-12 p-d-flex p-jc-center" style="width: 100vw">
+    <div class="">
+        <p-card>
+            <div [formGroup]="loginFormGroup">
+                <div  class="p-field p-formgrid">
+                    <label for="email" class="p-col-fixed" style="width:100px">E-Mail</label>
+                    <div class="p-col">
+                        <input id="email" type="text" pInputText formControlName="email"/>
+                    </div>
+                </div>
+                <div class="p-field p-formgrid">
+                    <label for="password" class="p-col-fixed" style="width:100px">Password</label>
+                    <div class="p-col">
+                        <input id="password" type="password" pInputText formControlName="password"/>
+                    </div>
+                </div>
+                <div class="p-field p-formgrid">
+                    <div class="p-col p-d-flex p-jc-center">
+                        <p-button (onClick)="submitLogin()">Login</p-button>
+                    </div>
+                </div>
+            </div>
+        </p-card>
+    </div>
+</div>
+

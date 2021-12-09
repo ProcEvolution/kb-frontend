@@ -1,0 +1,79 @@
+<ng-container *ngIf="resultObs | async as result; else loading">
+
+  <div class="p-grid">
+    <div class="p-col-12 p-md-6 p-md-offset-3">
+      <h1 class="p-text-center">Resultat</h1>
+    </div>
+
+
+    <div class="p-col-12">
+      <p-dataView #dv [value]="processResults" [paginator]="true" [rows]="9" filterBy="name"
+                  [sortField]="'name'" layout="list">
+        <ng-template pTemplate="header">
+          <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
+        <span class="p-input-icon-left p-mb-2 p-mb-md-0">
+                              <i class="pi pi-search"></i>
+                    <input type="search" pInputText placeholder="Search by Name" (input)="dv.filter($event.target.value)">
+                </span>
+            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+          </div>
+        </ng-template>
+        <ng-template let-result pTemplate="listItem">
+          <div class="p-col-12">
+            <div class="orange-shadow p-m-1" style="width: 100%; display: flex">
+              <img style="width: 100px;" [src]="result.wearable.iconURL"/>
+              <div class="product-list-detail">
+                <div class="product-name">{{result.wearable.name}}</div>
+                <div class="product-description">{{result.wearable.description}}</div>
+                <p-rating [ngModel]="result.rating" [readonly]="true" [cancel]="false"></p-rating>
+                <p-badge severity="info" value="{{result.percentage | number: '1.2-2'}}%"></p-badge>
+                <div class="p-grid p-justify-center p-p-1">
+                  <p-badge class="p-m-1" *ngFor="let r of result.activities" severity="info" value="{{r.name.toUpperCase()}}"></p-badge>
+                </div>
+                <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{result.wearable.wearableCategory.name}}</span>
+              </div>
+<!--              <div class="product-list-action">-->
+<!--                <span class="product-price">{{result.price}}</span>-->
+<!--                <span>{{result.status}}</span>-->
+<!--              </div>-->
+            </div>
+          </div>
+        </ng-template>
+        <ng-template let-result pTemplate="gridItem">
+          <div class="p-col-12 p-md-4">
+            <div class="result-grid-item card orange-shadow p-m-2">
+              <div class="result-grid-item-top">
+                <div style="width: 100%;">
+                  <div style="width: 100%;">
+                    <img style="width: 100px; height: 100px;" [src]="result.wearable.iconURL"/>
+                  </div>
+                  <i class="pi pi-tag result-category-icon"></i>
+                  <span class="result-category">{{result.wearable.wearableCategory.name}}</span>
+                </div>
+                <span>{{result.status}}</span>
+              </div>
+              <div class="result-grid-item-content">
+                <div>{{result.wearable.name}}</div>
+                <div>{{result.wearable.description}}</div>
+                <p-rating [ngModel]="result.rating" [readonly]="true" [cancel]="false"></p-rating>
+                <p-badge severity="info" value="{{result.percentage | number: '1.2-2'}}%"></p-badge>
+                <div class="p-grid p-justify-center p-p-1">
+                  <p-badge class="p-m-1" *ngFor="let r of result.activities" severity="info" value="{{r.name.toUpperCase()}}"></p-badge>
+                </div>
+              </div>
+<!--              <div class="result-grid-item-bottom">-->
+<!--                <span class="result-price">{{result.price}}</span>-->
+<!--              </div>-->
+            </div>
+          </div>
+        </ng-template>
+      </p-dataView>
+
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>
+

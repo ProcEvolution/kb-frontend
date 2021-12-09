@@ -1,0 +1,25 @@
+<ng-container *ngIf="wearableObs | async as wearables; else loading">
+
+  <div class="p-grid">
+    <div class="p-col-12 p-md-6 p-md-offset-3">
+      <h1 class="p-text-center">Wearables</h1>
+    </div>
+  </div>
+
+  <div class="p-d-flex p-flex-row p-jc-center p-flex-wrap p-p-2">
+    <p-card *ngFor="let w of wearables | filterOnWearableCategory: wearableCategory" (click)="onClick(w)" class="p-m-4 p-p-2 p-mt-auto" header="{{w.name}}" subheader="{{w.wearableCategory.name}}" [style]="{width: '300px'}" styleClass="p-card-shadow">
+      <ng-template pTemplate="header">
+        <div>
+          <img alt="Card" [src]="w.iconURL">
+          <p>{{w.description}}</p>
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+
+</ng-container>
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>
+
